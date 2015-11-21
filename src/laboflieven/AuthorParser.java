@@ -1,7 +1,6 @@
 package laboflieven;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +10,7 @@ import java.util.regex.Pattern;
 public class AuthorParser {
     public List<Author> getAuthors(String ugentAuthors)
     {
-        List<Author> authors = new ArrayList<Author>();
+        Set<Author> authors = new TreeSet<Author>();
         String[] authorInput = ugentAuthors.split(";");
         for (String authorCoded : authorInput)
         {
@@ -47,7 +46,7 @@ public class AuthorParser {
             author.uzId = code;
             authors.add(author);
         }
-        return authors;
+        return new ArrayList(authors);
     }
 
 }
