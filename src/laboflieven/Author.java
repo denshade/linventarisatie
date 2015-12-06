@@ -1,5 +1,8 @@
 package laboflieven;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Lieven on 15-11-2015.
  */
@@ -9,6 +12,7 @@ public class Author implements Comparable<Author>
     public String firstName;
     public String lastName;
     public Long uzId;
+    public List<String> affiliation = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

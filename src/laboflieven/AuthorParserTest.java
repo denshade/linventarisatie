@@ -44,4 +44,13 @@ public class AuthorParserTest
         assertNull(auths.get(0).uzId);
 
     }
+
+
+    @Test
+    public void verifyAffiliation()
+    {
+        AuthorParser parser = new AuthorParser();
+        List<Author> auths = parser.getAuthors("Soly, Hugo (801000325312@LW)");
+        assertEquals("LW", auths.get(0).affiliation.get(0));
+    }
 }

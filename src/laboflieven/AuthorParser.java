@@ -27,6 +27,7 @@ public class AuthorParser {
                     String codeNoAfil = codeWithAffil;
                     if (codeWithAffil.indexOf('@') > -1) {
                         codeNoAfil = codeWithAffil.substring(0, codeWithAffil.indexOf('@'));
+                        author.affiliation.add(codeWithAffil.substring(codeWithAffil.indexOf('@') + 1));
                     }
                     try {
                         code = Long.parseLong(codeNoAfil.trim());

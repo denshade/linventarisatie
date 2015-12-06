@@ -45,3 +45,36 @@ CREATE TABLE IF NOT EXISTS `article_contact` (
   CONSTRAINT `article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `contact_id` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `contact_affiliation` (
+  `contactid` int(11) NOT NULL,
+  `affiliationid` int(11) NOT NULL,
+  PRIMARY KEY (`contactid`,`affiliationid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `affiliation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title_UNIQUE` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+SELECT DISTINCT contact.* FROM inventarisatie.article
+INNER JOIN article_contact ON article_contact.article_id = article.id
+INNER JOIN contact ON contact.id = article_contact.contact_id
+WHERE article.id in (
+SELECT article.id FROM inventarisatie.article
+INNER JOIN article_contact ON article_contact.article_id = article.id
+INNER JOIN contact ON contact.id = article_contact.contact_id
+WHERE type = 'journalArticle' and  contact.firstname = 'Luc' and contact.lastname='Dupré')
+AND contact.lastname != 'Dupré';
+
+
+
+SELECT article.* FROM inventarisatie.article
+INNER JOIN article_keyword ON article_keyword.article_id= article.id
+INNER JOIN keywordterm ON keywordterm.id = article_keyword.keyword_id
+WHERE type = 'journalArticle' and  keywordterm.name = 'Iron Age';
+
+
+
